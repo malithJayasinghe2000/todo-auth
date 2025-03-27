@@ -37,14 +37,14 @@ export const register = async (req, res) => {
             maxAge: 7*24*60*60*1000
         });
         //sending welcome email
-        const mailOptions = {
-            from: process.env.SENDER_EMAIL,
-            to: email,
-            subject: "Welcome to Todo-Auth",
-            text: `Welcome to Todo-Auth. We are happy to have you with us`
-        };
+        // const mailOptions = {
+        //     from: process.env.SENDER_EMAIL,
+        //     to: email,
+        //     subject: "Welcome to Todo-Auth",
+        //     text: `Welcome to Todo-Auth. We are happy to have you with us`
+        // };
 
-        await transporter.sendMail(mailOptions);
+        // await transporter.sendMail(mailOptions);
 
         return res.json({success: true, message: "Register success"});
 
@@ -186,6 +186,41 @@ export const resetPassword = async (req, res) => {
         await user.save();
 
         return res.json({success: true, message: "Password reset success"});
+
+    }catch (error){
+        res.json({success: false, message: error.message});
+
+    }
+}
+
+//update user password
+export const changePassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+
+    if(!currentPassword || !newPassword){
+        return res.json({success: false, message: "Current password and new password are required"});
+    }
+
+    try{
+
+        const user = await userModel.findById(req.body.userId);
+
+        if(!user){
+            return res.json({success: false, message: "User not found"});
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(currentPassword, user.password);
+
+        if(!isPasswordCorrect){
+            return res.json({success: false, message: "Invalid current password"});
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        user.password = hashedPassword;
+        await user.save();
+
+        return res.json({success: true, message: "Password changed successfully"});
 
     }catch (error){
         res.json({success: false, message: error.message});
