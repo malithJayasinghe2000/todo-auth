@@ -2,6 +2,7 @@ import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import transporter from "../config/nodemailer.js";
+import { PASSWORD_RESET_TEMPLATE } from "../config/emailTemplate.js";
 
 export const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -139,9 +140,8 @@ export const sendResetOtp = async (req, res) => {
         const mailOption = {
             from: process.env.SENDER_EMAIL,
             to: user.email,
-            subject: "Password reset OTP",
-            text: `Your OTP for resetting your password is ${otp}.
-            Use this OTP to reset your password. It will expire in 15 minutes`
+            subject: "Password Reset OTP - Todo-Auth",
+            html: PASSWORD_RESET_TEMPLATE(otp)
         };
 
         await transporter.sendMail(mailOption);
