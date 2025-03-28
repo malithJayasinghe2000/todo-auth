@@ -40,6 +40,7 @@ const ChangePassword = () => {
                 setCurrentPassword('')
                 setNewPassword('')
                 setConfirmPassword('')
+                //check tommorow
                 setIsLoggedin(false)
                 await axios.post(backendUrl+'/api/auth/logout')
                 navigate('/login')

@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/mongodb.js';
 import authRouter from './routes/authRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import taskRouter from './routes/taskRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 8001;
@@ -22,6 +23,7 @@ app.use(cors({origin: allowedOrigins, credentials: true}));
 //     });
 app.use('/api/auth',authRouter);
 app.use('/api/user',userRouter);
+app.use('/api/task',taskRouter);
 
 
 app.listen(port, () => {
