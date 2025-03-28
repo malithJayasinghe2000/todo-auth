@@ -3,7 +3,7 @@ import taskModel from "../models/taskModel.js";
 export const createTask = async (req, res) => {
     const { title, description, dueDate } = req.body;
 
-    if (!title || !description) {
+    if (!title || !description || !dueDate) {
         return res.json({ success: false, message: "All fields are required" });
     }
 
@@ -52,6 +52,25 @@ export const deleteTask = async (req, res) => {
         await taskModel.findByIdAndDelete(taskId);
 
         res.json({ success: true, message: "Task deleted" });
+
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+
+    }
+}
+
+export const updateTask = async (req, res) => {
+    const { taskId, title, description, dueDate } = req.body;
+
+    if (!taskId || !title || !description) {
+        return res.json({ success: false, message: "Task ID, title and description are required" });
+    }
+
+    try {
+
+        await taskModel.findByIdAndUpdate(taskId, { title, description, dueDate });
+
+        res.json({ success: true, message: "Task updated" });
 
     } catch (error) {
         res.json({ success: false, message: error.message });

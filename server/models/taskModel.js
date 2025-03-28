@@ -11,7 +11,7 @@ const taskSchema = new mongoose.Schema({
     },
     dueDate: {
         type: Date,
-        default: Date.now
+        required: true
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
