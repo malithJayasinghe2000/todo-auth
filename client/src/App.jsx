@@ -2,10 +2,10 @@ import React from 'react'
 import { Routes,Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import EmailVerify from './pages/EmailVerify'
 import ResetPassword from './pages/ResetPassword'
 import { ToastContainer, toast } from 'react-toastify';
 import ChangePassword from './pages/ChangePassword'
+import Dashboard from './pages/Dashboard'
 
 const App = () => {
   return (
@@ -14,9 +14,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/email-verify" element={<EmailVerify />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path='/change-password' element={<ChangePassword />} />
+        <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </div>
   )

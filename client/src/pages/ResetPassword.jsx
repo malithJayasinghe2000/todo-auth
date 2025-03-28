@@ -75,8 +75,11 @@ const ResetPassword = () => {
 
   return (
     <div className='flex flex-col items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400 to-pink-500'>
-      <button onClick={() => navigate('/')} className='absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer'>TODO</button>
-
+      <div className='w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0 bg-white/80 backdrop-blur-sm shadow-sm'>
+        <button onClick={() => navigate('/')} className='text-xl font-bold text-gray-800 tracking-tight hover:text-blue-600 transition-colors'>
+          <span className='text-blue-600'>TODO</span>App
+        </button>
+      </div>
       {/* email input form */}
       {!isEmailSent &&
         <form onSubmit={onSubmitEmail} className='bg-slate-900 p-8 rounded-lg shadow-lg w-96 test-sm'>
