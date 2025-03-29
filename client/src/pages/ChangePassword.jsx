@@ -60,22 +60,25 @@ const ChangePassword = () => {
 
 
     return (
-        <div className='flex flex-col items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400 to-pink-500'>
-            <Navbar />
-            <form onSubmit={changePassword} className='bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm'>
-                <h2 className='text-3xl font-semibold text-white text-center mb-3'>Change Password</h2>
-                <p className='text-center text-sm mb-6'>Change your password</p>
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-5">
+                <h2 className="text-2xl font-bold text-white">Security</h2>
+                <p className="text-blue-100 mt-1">Change your password</p>
+            </div>
 
-                <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
+            <form onSubmit={changePassword}className="p-6">
+                
+
+                <div className='relative mb-4'>
                     <input type={showPassword ? 'text' : 'password'}
                         placeholder='Current Password'
-                        className='bg-transparent outline-none w-full'
+                        className="pl-10 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md p-2.5"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)} />
                     <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="text-indigo-300 hover:text-white focus:outline-none"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-black hover:text-gray-600 focus:outline-none"
                     >
                         {showPassword ?
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -90,10 +93,10 @@ const ChangePassword = () => {
                     </button>
                 </div>
 
-                <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
+                <div className='relative mb-4'>
                     <input type={showPassword ? 'text' : 'password'}
                         placeholder='New Password'
-                        className='bg-transparent outline-none w-full'
+                        className="pl-10 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md p-2.5"
                         minLength={8}
                         pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
                         value={newPassword}
@@ -101,7 +104,7 @@ const ChangePassword = () => {
                         <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="text-indigo-300 hover:text-white focus:outline-none"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-black hover:text-gray-600 focus:outline-none"
                     >
                         {showPassword ?
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -116,10 +119,10 @@ const ChangePassword = () => {
                     </button>
                 </div>
 
-                <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
+                <div className='relative mb-4'>
                     <input type={showPassword ? 'text' : 'password'}
                         placeholder='Confirm New Password'
-                        className='bg-transparent outline-none w-full'
+                        className="pl-10 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md p-2.5"
                         minLength={8}
                         pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
                         value={confirmPassword}
@@ -127,7 +130,7 @@ const ChangePassword = () => {
                         <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="text-indigo-300 hover:text-white focus:outline-none"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-black hover:text-gray-600 focus:outline-none"
                     >
                         {showPassword ?
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -142,7 +145,7 @@ const ChangePassword = () => {
                     </button>
                 </div>
 
-                <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium'>Change Password
+                <button className='w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200'>Change Password
                 </button>
             </form>
 
