@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TaskItem from './TaskItem'
 
-const TaskList = ({ tasks, onEdit, onDelete }) => {
+const TaskList = ({ tasks, onEdit, onDelete, onDone }) => {
   const [sortOption, setSortOption] = useState('default') // default, date-asc, date-desc
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState({
@@ -194,8 +194,8 @@ const TaskList = ({ tasks, onEdit, onDelete }) => {
           <option value="default">Default Sorting</option>
           <option value="date-asc">Date (Earliest First)</option>
           <option value="date-desc">Date (Latest First)</option>
-          <option value="time-asc">Time (Morning First)</option>
-          <option value="time-desc">Time (Evening First)</option>
+          {/* <option value="time-asc">Time (Morning First)</option>
+          <option value="time-desc">Time (Evening First)</option> */}
         </select>
       </div>
       
@@ -277,6 +277,7 @@ const TaskList = ({ tasks, onEdit, onDelete }) => {
                     task={task} 
                     onEdit={() => onEdit(task)} 
                     onDelete={() => onDelete(task._id)} 
+                    onDone={() => onDone(task._id)}
                     isToday={true}
                   />
                 ))}
@@ -296,6 +297,7 @@ const TaskList = ({ tasks, onEdit, onDelete }) => {
                     task={task} 
                     onEdit={() => onEdit(task)} 
                     onDelete={() => onDelete(task._id)} 
+                    onDone={() => onDone(task._id)}
                   />
                 ))}
               </div>
@@ -314,6 +316,7 @@ const TaskList = ({ tasks, onEdit, onDelete }) => {
                     task={task} 
                     onEdit={() => onEdit(task)} 
                     onDelete={() => onDelete(task._id)} 
+                    onDone={() => onDone(task._id)}
                   />
                 ))}
               </div>

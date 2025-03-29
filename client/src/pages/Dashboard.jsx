@@ -100,6 +100,23 @@ const Dashboard = () => {
         setShowTaskForm(true)
     }
 
+    const handleDoneTask = async (taskId) => {
+        try {
+            const { data } = await axios.put(backendUrl + '/api/task/done' , { 
+                taskId
+            })
+            if(data.success){
+                toast.success(data.message)
+                fetchTasks()
+            }
+            else{
+                toast.error(data.message)
+            }
+        }catch(error){
+            toast.error(error.message)
+        }
+    }
+
     return (
         <div className='flex flex-col min-h-screen bg-gradient-to-br from-blue-200 to-purple-400 to-pink-500 '>
             <Navbar />
@@ -142,6 +159,7 @@ const Dashboard = () => {
                         tasks={tasks}
                         onEdit={openEditForm}
                         onDelete={handleDeleteTask}
+                        onDone={handleDoneTask}
                     />
                 )}
             </div>

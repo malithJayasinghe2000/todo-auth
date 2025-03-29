@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TaskItem = ({ task, onEdit, onDelete, isToday }) => {
+const TaskItem = ({ task, onEdit, onDelete, isToday, onDone }) => {
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
     
@@ -22,6 +22,7 @@ const TaskItem = ({ task, onEdit, onDelete, isToday }) => {
   const now = new Date();
   const dueDate = new Date(task.dueDate);
   const isOverdue = dueDate < now && !task.completed;
+  const isCompleted = task.completed;
   
   // Get relative time
   const getTimeRemaining = () => {
@@ -74,12 +75,32 @@ const TaskItem = ({ task, onEdit, onDelete, isToday }) => {
     cardStyle = 'bg-red-50/90';
   }
   
+  if (isCompleted) {
+    cardStyle = 'bg-green-50/90';
+    borderStyle = 'border-l-4 border-green-500';
+    highlightStyle = 'ring-2 ring-green-300 ring-opacity-50';
+  }
+  
   return (
     <div className={`rounded-lg shadow-md overflow-hidden hover:shadow-lg transition ${cardStyle} ${highlightStyle}`}>
       <div className={`p-4 ${borderStyle}`}>
         <div className='flex justify-between items-start mb-2'>
           <h3 className='font-semibold text-lg text-gray-800 break-words'>{task.title}</h3>
           <div className='flex gap-2'>
+            
+            <button
+              onClick={onDone}
+              className={`text-green-600 hover:text-green-800`}
+            >
+              {!task.completed ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              ) : (
+                <span className="text-green-600 font-medium cursor-default">Done</span>
+              )}
+            </button>
+
             <button 
               onClick={onEdit}
               className='text-blue-600 hover:text-blue-800'

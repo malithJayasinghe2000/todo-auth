@@ -77,3 +77,23 @@ export const updateTask = async (req, res) => {
 
     }
 }
+
+export const taskDone = async (req, res) => {
+    const { taskId } = req.body;
+    if (!taskId) {
+        return res.json({ success: false, message: "Task ID is required" });
+    }
+
+    try {
+        const task = await taskModel.findById(taskId);
+        if (!task) {
+            return res.json({ success: false, message: "Task not found" });
+        }
+        task.completed = true;
+        await task.save();
+        res.json({ success: true, message: "Task marked as completed" });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+}
+
