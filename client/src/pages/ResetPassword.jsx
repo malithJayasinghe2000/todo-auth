@@ -135,7 +135,10 @@ const ResetPassword = () => {
           </p>
           <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
             <input type='password' placeholder='New Password' className='bg-transparent outline-none text-white'
-              value={newPassword} onChange={e => setNewPassword(e.target.value)} required />
+              value={newPassword} 
+              minLength={8}
+              pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+              onChange={e => setNewPassword(e.target.value)} required />
           </div>
           <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white mt-3'>
             submit

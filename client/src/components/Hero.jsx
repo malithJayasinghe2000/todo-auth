@@ -11,12 +11,12 @@ const Hero = () => {
           Hello <span className='text-blue-600'>{userData ? userData.name : 'Guest'}</span>!
         </h1>
         
-        <h2 className='text-2xl sm:text-4xl font-bold mb-6 text-gray-800'>
+        <h2 className='text-2xl sm:text-4xl font-bold mb-6 text-gray-800 text-center md:text-center'>
           Welcome to Your Personal Task Manager
         </h2>
         
-        <p className='mb-8 text-lg text-gray-600 max-w-xl mx-auto leading-relaxed text-center'>
-          Stay organized, meet deadlines, and achieve your goals with our simple yet powerful todo application.
+        <p className='mb-8 text-lg text-gray-600 max-w-xl mx-auto leading-relaxed text-center md:text-center'>
+          Stay organized, meet deadlines, and achieve your goals with our simple todo application.
         </p>
         
         <div className='flex flex-col sm:flex-row gap-4 justify-center'>

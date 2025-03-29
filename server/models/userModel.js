@@ -7,25 +7,14 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         required: true,
         unique: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
-    // verifyOtp:{
-    //     type: String,
-    //     default: ''
-    // },
-    // verifyOtpExpireAt:{
-    //     type: Number,
-    //     default: 0
-    // },
-    // isAccountVerified:{
-    //     type: Boolean,
-    //     default: false
-    // },
     resetOtp:{
         type: String,
         default: ''
