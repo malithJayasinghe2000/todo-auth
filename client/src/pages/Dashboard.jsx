@@ -102,40 +102,9 @@ const Dashboard = () => {
 
     return (
         <div className='flex flex-col min-h-screen bg-gradient-to-br from-blue-200 to-purple-400 to-pink-500 '>
-            <nav className='w-full bg-slate-900/90 text-white p-4 shadow-lg fixed top-0 z-10 '>
-                <div className='container mx-auto flex justify-between items-center'>
-                    <h1 className='text-2xl font-bold'>Task Dashboard</h1>
-                    <div className='flex items-center gap-4'>
-                        <span className='hidden md:block'>Welcome, {userData?.name || 'User'}!</span>
-                        <button
-                            onClick={() => navigate('/change-password')}
-                            className='py-1 px-3 text-sm border border-white rounded-lg text-white'
-                        >
-                            Change Password
-                        </button>
-                        <button
-                            onClick={async () => {
-                                try {
-                                    const { data } = await axios.post(backendUrl + '/api/auth/logout')
-                                    if (data.success) {
-                                        setIsLoggedin(false)
-                                        setUserData(false)
-                                        navigate('/')
-                                    }
-                                } catch (error) {
-                                    toast.error(error.message)
-                                }
-                            }}
-                            className='py-1 px-3 mr-1 text-sm bg-red-600 rounded hover:bg-red-700'
-                        >
-                            Logout
-                        </button>
-                    </div>
-                </div>
-            </nav>
-            {/* <Navbar /> */}
+            <Navbar />
 
-            <div className='container mx-auto p-4 flex-grow top-24 mt-20'>
+            <div className='container mx-auto p-4 flex-grow top-24 mt-24'>
                 <div className='flex flex-col md:flex-row md:justify-between items-center mb-6'>
                     <h2 className='text-xl font-bold mb-4 md:mb-0'>Your Tasks</h2>
                     <button

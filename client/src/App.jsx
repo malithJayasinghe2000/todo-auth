@@ -6,6 +6,7 @@ import ResetPassword from './pages/ResetPassword'
 import { ToastContainer, toast } from 'react-toastify';
 import ChangePassword from './pages/ChangePassword'
 import Dashboard from './pages/Dashboard'
+import Profile from './pages/Profile'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path='/change-password' element={<ChangePassword />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   )

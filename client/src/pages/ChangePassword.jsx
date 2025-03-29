@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Navbar from '../components/Navbar'
 
 const ChangePassword = () => {
     axios.defaults.withCredentials = true
@@ -43,7 +44,7 @@ const ChangePassword = () => {
                 setCurrentPassword('')
                 setNewPassword('')
                 setConfirmPassword('')
-                //check tommorow
+                
                 setIsLoggedin(false)
                 await axios.post(backendUrl + '/api/auth/logout')
                 window.location.reload()
@@ -60,11 +61,7 @@ const ChangePassword = () => {
 
     return (
         <div className='flex flex-col items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400 to-pink-500'>
-            <div className='w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0 bg-white/80 backdrop-blur-sm shadow-sm'>
-                <button onClick={() => navigate('/')} className='text-xl font-bold text-gray-800 tracking-tight hover:text-blue-600 transition-colors'>
-                    <span className='text-blue-600'>TODO</span>App
-                </button>
-            </div>
+            <Navbar />
             <form onSubmit={changePassword} className='bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm'>
                 <h2 className='text-3xl font-semibold text-white text-center mb-3'>Change Password</h2>
                 <p className='text-center text-sm mb-6'>Change your password</p>
