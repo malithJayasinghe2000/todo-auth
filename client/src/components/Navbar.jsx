@@ -51,13 +51,6 @@ const Navbar = () => {
         }
     }
 
-    // Navigation items - now visible directly in navbar
-    const navItems = [
-        // { name: 'Home', path: '/' },
-        // { name: 'Dashboard', path: '/dashboard', requiresAuth: true },
-        
-    ]
-
     const isActive = (path) => {
         if (path === '/') return location.pathname === '/'
         return location.pathname.startsWith(path)
@@ -65,7 +58,9 @@ const Navbar = () => {
 
     return (
         <nav className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            scrolled ? 'bg-white shadow-md py-2' : 'bg-white/80 backdrop-blur-sm py-4'
+            scrolled 
+                ? 'bg-white/95 shadow-md py-2' 
+                : 'bg-white/80 backdrop-blur-sm py-3'
         }`}>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                 <div className='flex items-center justify-between h-16'>
@@ -73,43 +68,34 @@ const Navbar = () => {
                     <div className='flex-shrink-0'>
                         <button 
                             onClick={() => navigate('/')} 
-                            className='text-xl font-bold text-gray-800 tracking-tight hover:text-blue-600 transition-colors'>
+                            className='text-xl font-bold text-gray-800 tracking-tight hover:text-blue-600 transition-colors'
+                        >
                             <span className='text-blue-600'>TODO</span>App
                         </button>
                     </div>
-                    
-                    {/* Desktop Navigation - Always visible */}
-                    {/* <div className='hidden md:flex items-center space-x-4 flex-1 justify-center'>
-                        {navItems.map((item) => (
-                            (!item.requiresAuth || userData) && (
-                                <button
-                                    key={item.name}
-                                    onClick={() => navigate(item.path)}
-                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                                        isActive(item.path)
-                                            ? 'text-blue-600 bg-blue-50'
-                                            : 'text-gray-600 hover:bg-gray-100'
-                                    }`}
-                                >
-                                    {item.name}
-                                </button>
-                            )
-                        ))}
-                    </div> */}
                     
                     {/* User Menu/Login Button */}
                     <div className='flex items-center'>
                         {userData ? (
                             <div className='relative ml-3' ref={userMenuRef}>
-                                <div 
+                                <button
                                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                                    className='w-10 h-10 flex justify-center items-center rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-white font-medium shadow-md hover:from-blue-600 hover:to-blue-800 transition-all cursor-pointer'
+                                    className='flex items-center gap-2 py-1.5 px-3 rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 border border-blue-200 text-gray-800 transition-all shadow-sm'
+                                    aria-expanded={userMenuOpen}
+                                    aria-haspopup="true"
                                 >
-                                    {userData.name[0].toUpperCase()}
-                                </div>
+                                    <div className='w-8 h-8 flex justify-center items-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 text-white font-medium shadow-sm'>
+                                        {userData.name[0].toUpperCase()}
+                                    </div>
+                                    <span className="hidden md:inline font-medium">{userData.name.split(' ')[0]}</span>
+                                    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                
                                 {userMenuOpen && (
                                     <div className='absolute top-full right-0 z-10 mt-2 origin-top-right transition-all duration-200 ease-in-out'>
-                                        <div className='py-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 min-w-48'>
+                                        <div className='py-1 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 min-w-48 border border-gray-100'>
                                             <div className='px-4 py-2 text-sm text-gray-500 border-b border-gray-100'>
                                                 <p className='font-medium text-gray-700'>{userData.name}</p>
                                                 <p className='text-xs text-gray-500 truncate'>{userData.email}</p>
@@ -119,23 +105,23 @@ const Navbar = () => {
                                                     navigate('/dashboard')
                                                     setUserMenuOpen(false)
                                                 }} className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer flex items-center'>
-                                                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                                                    <svg className="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                                                     Dashboard
                                                 </li>
                                                 <li onClick={() => {
                                                     navigate('/profile')
                                                     setUserMenuOpen(false)
                                                 }} className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer flex items-center'>
-                                                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                                    <svg className="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                                     Profile
                                                 </li>
-                                                <li onClick={() => {
+                                                {/* <li onClick={() => {
                                                     navigate('/change-password')
                                                     setUserMenuOpen(false)
                                                 }} className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer flex items-center'>
-                                                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+                                                    <svg className="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
                                                     Change Password
-                                                </li>
+                                                </li> */}
                                                 <li onClick={() => {
                                                     logout()
                                                     setUserMenuOpen(false)
@@ -150,55 +136,30 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <div className='flex space-x-2'>
-                                <button onClick={() => navigate('/login')} className='flex items-center gap-2 border border-blue-500 rounded-full px-5 py-1.5 text-blue-600 hover:bg-blue-50 transition-all font-medium'>
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
+                                <button 
+                                    onClick={() => navigate('/login')} 
+                                    className='flex items-center gap-2 py-1.5 px-4 bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 border border-blue-200 rounded-lg text-blue-600 transition-all shadow-sm font-medium'
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                    </svg>
                                     Login
                                 </button>
-                                {/* <button onClick={() => navigate('/register')} className='hidden sm:flex items-center gap-2 bg-blue-600 text-white rounded-full px-5 py-1.5 hover:bg-blue-700 transition-all font-medium'>
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
-                                    Register
+                                {/* <button 
+                                    onClick={() => navigate('/register')} 
+                                    className='hidden md:flex items-center gap-2 py-1.5 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-lg text-white transition-all shadow-sm font-medium'
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                    </svg>
+                                    Sign Up
                                 </button> */}
                             </div>
                         )}
-                        
-                       
                     </div>
                 </div>
                 
-                {/* Mobile menu */}
-                {mobileMenuOpen && (
-                    <div className='md:hidden bg-white border-t mt-2 pt-2 pb-3 space-y-1'>
-                        {navItems.map((item) => (
-                            (!item.requiresAuth || userData) && (
-                                <button
-                                    key={item.name}
-                                    onClick={() => {
-                                        navigate(item.path)
-                                        setMobileMenuOpen(false)
-                                    }}
-                                    className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${
-                                        isActive(item.path)
-                                            ? 'text-blue-600 bg-blue-50'
-                                            : 'text-gray-600 hover:bg-gray-100'
-                                    }`}
-                                >
-                                    {item.name}
-                                </button>
-                            )
-                        ))}
-                        {!userData && (
-                            <button
-                                onClick={() => {
-                                    navigate('/register')
-                                    setMobileMenuOpen(false)
-                                }}
-                                className='block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100'
-                            >
-                                Register
-                            </button>
-                        )}
-                    </div>
-                )}
+                
             </div>
         </nav>
     )

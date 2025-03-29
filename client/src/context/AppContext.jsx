@@ -34,6 +34,7 @@ export const AppContextProvider = ({children})=>{
             toast.error(error.message)
         }
     }
+    
 
     useEffect(()=>{
         getAuthState()
