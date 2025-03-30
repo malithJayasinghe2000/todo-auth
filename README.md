@@ -57,10 +57,12 @@ Create a `.env` file in the `server` directory with the following:
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-SMTP_HOST=your_smtp_host
-SMTP_PORT=your_smtp_port
+NODE_ENV='development'
+
 SMTP_USER=your_smtp_email
 SMTP_PASS=your_smtp_password
+
+SENDER_EMAIL=your_email
 ```
 
 #### Client
