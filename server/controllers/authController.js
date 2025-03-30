@@ -7,16 +7,16 @@ import { PASSWORD_RESET_TEMPLATE } from "../config/emailTemplate.js";
 export const register = async (req, res) => {
     const { name, email, password } = req.body;
 
-    if(!name || !email || !password){
-        return res.json({success: false, message: "All fields are required"});
+    if (!name || !email || !password) {
+        return res.json({ success: false, message: "All fields are required" });
     }
 
-    try{
+    try {
 
-        const existingUser = await userModel.findOne({email});
+        const existingUser = await userModel.findOne({ email });
 
-        if(existingUser){
-            return res.json({success: false, message: "User already exists"});
+        if (existingUser) {
+            return res.json({ success: false, message: "User already exists" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -27,14 +27,14 @@ export const register = async (req, res) => {
             password: hashedPassword
         });
         await user.save();
-        
-        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: "7d"});
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-            maxAge: 7*24*60*60*1000
+            maxAge: 7 * 24 * 60 * 60 * 1000
         });
         //sending welcome email
         // const mailOptions = {
@@ -46,11 +46,11 @@ export const register = async (req, res) => {
 
         // await transporter.sendMail(mailOptions);
 
-        return res.json({success: true, message: "Register success"});
+        return res.json({ success: true, message: "Register success" });
 
 
-    }catch (error){
-        res.json({success: false, message: error.message});
+    } catch (error) {
+        res.json({ success: false, message: error.message });
 
     }
 
@@ -60,81 +60,81 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const { email, password } = req.body;
 
-    if(!email || !password){
-        return res.json({success: false, message: "All fields are required"});
+    if (!email || !password) {
+        return res.json({ success: false, message: "All fields are required" });
     }
 
-    try{
+    try {
 
-        const user = await userModel.findOne({email});
+        const user = await userModel.findOne({ email });
 
-        if(!user){
-            return res.json({success: false, message: "Invalid email"});
+        if (!user) {
+            return res.json({ success: false, message: "Invalid email" });
         }
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-        if(!isPasswordCorrect){
-            return res.json({success: false, message: "Invalid password"});
+        if (!isPasswordCorrect) {
+            return res.json({ success: false, message: "Invalid password" });
         }
 
-        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: "7d"});
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-            maxAge: 7*24*60*60*1000
+            maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
-        return res.json({success: true, message: "Login success"});
+        return res.json({ success: true, message: "Login success" });
 
-    }catch (error){
-        res.json({success: false, message: error.message});
+    } catch (error) {
+        res.json({ success: false, message: error.message });
 
     }
 }
 
 export const logout = async (req, res) => {
-    try{
-        res.clearCookie("token",{
+    try {
+        res.clearCookie("token", {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
         });
-        return res.json({success: true, message: "Loged out"});
-    }catch(error) {
-        return res.json({success: false, message: error.message});
+        return res.json({ success: true, message: "Loged out" });
+    } catch (error) {
+        return res.json({ success: false, message: error.message });
     }
 }
 
 export const isAuthenticated = async (req, res) => {
-    try{
-        return res.json({success: true});
-    }catch(error){
-        res.json({success: false, message: error.message});
+    try {
+        return res.json({ success: true });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
     }
 }
 
 export const sendResetOtp = async (req, res) => {
     const { email } = req.body;
 
-    if(!email){
-        return res.json({success: false, message: "Email is required"});
+    if (!email) {
+        return res.json({ success: false, message: "Email is required" });
     }
 
-    try{
+    try {
 
-        const user = await userModel.findOne({email});
+        const user = await userModel.findOne({ email });
 
-        if(!user){
-            return res.json({success: false, message: "Invalid email"});
+        if (!user) {
+            return res.json({ success: false, message: "Invalid email" });
         }
 
         const otp = String(Math.floor(100000 + Math.random() * 900000));
 
         user.resetOtp = otp;
-        user.resetOtpExpireAt = Date.now() + 15*60*1000;
+        user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
         await user.save();
 
         const mailOption = {
@@ -146,10 +146,10 @@ export const sendResetOtp = async (req, res) => {
 
         await transporter.sendMail(mailOption);
 
-        return res.json({success: true, message: "Reset OTP sent to your email"});
+        return res.json({ success: true, message: "Reset OTP sent to your email" });
 
-    }catch (error){
-        res.json({success: false, message: error.message});
+    } catch (error) {
+        res.json({ success: false, message: error.message });
 
     }
 }
@@ -158,24 +158,24 @@ export const sendResetOtp = async (req, res) => {
 export const resetPassword = async (req, res) => {
     const { email, otp, newPassword } = req.body;
 
-    if(!email || !otp || !newPassword){
-        return res.json({success: false, message: "Email, OTP and new password are required"});
+    if (!email || !otp || !newPassword) {
+        return res.json({ success: false, message: "Email, OTP and new password are required" });
     }
 
-    try{
+    try {
 
-        const user = await userModel.findOne({email});
+        const user = await userModel.findOne({ email });
 
-        if(!user){
-            return res.json({success: false, message: "User not found"});
+        if (!user) {
+            return res.json({ success: false, message: "User not found" });
         }
 
-        if(user.resetOtp === "" || user.resetOtp  !== otp){
-            return res.json({success: false, message: "Invalid OTP"});
+        if (user.resetOtp === "" || user.resetOtp !== otp) {
+            return res.json({ success: false, message: "Invalid OTP" });
         }
 
-        if(Date.now() > user.resetOtpExpireAt){
-            return res.json({success: false, message: "OTP expired"});
+        if (Date.now() > user.resetOtpExpireAt) {
+            return res.json({ success: false, message: "OTP expired" });
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -185,10 +185,10 @@ export const resetPassword = async (req, res) => {
         user.resetOtpExpireAt = 0;
         await user.save();
 
-        return res.json({success: true, message: "Password reset success"});
+        return res.json({ success: true, message: "Password reset success" });
 
-    }catch (error){
-        res.json({success: false, message: error.message});
+    } catch (error) {
+        res.json({ success: false, message: error.message });
 
     }
 }
@@ -197,22 +197,22 @@ export const resetPassword = async (req, res) => {
 export const changePassword = async (req, res) => {
     const { currentPassword, newPassword } = req.body;
 
-    if(!currentPassword || !newPassword){
-        return res.json({success: false, message: "Current password and new password are required"});
+    if (!currentPassword || !newPassword) {
+        return res.json({ success: false, message: "Current password and new password are required" });
     }
 
-    try{
+    try {
 
         const user = await userModel.findById(req.body.userId);
 
-        if(!user){
-            return res.json({success: false, message: "User not found"});
+        if (!user) {
+            return res.json({ success: false, message: "User not found" });
         }
 
         const isPasswordCorrect = await bcrypt.compare(currentPassword, user.password);
 
-        if(!isPasswordCorrect){
-            return res.json({success: false, message: "Invalid current password"});
+        if (!isPasswordCorrect) {
+            return res.json({ success: false, message: "Invalid current password" });
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -220,10 +220,10 @@ export const changePassword = async (req, res) => {
         user.password = hashedPassword;
         await user.save();
 
-        return res.json({success: true, message: "Password changed successfully"});
+        return res.json({ success: true, message: "Password changed successfully" });
 
-    }catch (error){
-        res.json({success: false, message: error.message});
+    } catch (error) {
+        res.json({ success: false, message: error.message });
 
     }
 }

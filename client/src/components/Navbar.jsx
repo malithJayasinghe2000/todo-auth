@@ -11,7 +11,7 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [userMenuOpen, setUserMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
-    
+
     // Ref for user menu dropdown to handle outside clicks
     const userMenuRef = useRef(null)
 
@@ -23,7 +23,7 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
-    
+
     // Handle outside clicks for user menu
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -31,7 +31,7 @@ const Navbar = () => {
                 setUserMenuOpen(false)
             }
         }
-        
+
         document.addEventListener('mousedown', handleOutsideClick)
         return () => document.removeEventListener('mousedown', handleOutsideClick)
     }, [])
@@ -57,23 +57,22 @@ const Navbar = () => {
     }
 
     return (
-        <nav className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            scrolled 
-                ? 'bg-white/95 shadow-md py-2' 
+        <nav className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+                ? 'bg-white/95 shadow-md py-2'
                 : 'bg-white/80 backdrop-blur-sm py-3'
-        }`}>
+            }`}>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                 <div className='flex items-center justify-between h-16'>
                     {/* Logo */}
                     <div className='flex-shrink-0'>
-                        <button 
-                            onClick={() => navigate('/')} 
+                        <button
+                            onClick={() => navigate('/')}
                             className='text-xl font-bold text-gray-800 tracking-tight hover:text-blue-600 transition-colors'
                         >
                             <span className='text-blue-600'>TODO</span>App
                         </button>
                     </div>
-                    
+
                     {/* User Menu/Login Button */}
                     <div className='flex items-center'>
                         {userData ? (
@@ -92,7 +91,7 @@ const Navbar = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
-                                
+
                                 {userMenuOpen && (
                                     <div className='absolute top-full right-0 z-10 mt-2 origin-top-right transition-all duration-200 ease-in-out'>
                                         <div className='py-1 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 min-w-48 border border-gray-100'>
@@ -136,8 +135,8 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <div className='flex space-x-2'>
-                                <button 
-                                    onClick={() => navigate('/login')} 
+                                <button
+                                    onClick={() => navigate('/login')}
                                     className='flex items-center gap-2 py-1.5 px-4 bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 border border-blue-200 rounded-lg text-blue-600 transition-all shadow-sm font-medium'
                                 >
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -145,21 +144,13 @@ const Navbar = () => {
                                     </svg>
                                     Login
                                 </button>
-                                {/* <button 
-                                    onClick={() => navigate('/register')} 
-                                    className='hidden md:flex items-center gap-2 py-1.5 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 rounded-lg text-white transition-all shadow-sm font-medium'
-                                >
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                                    </svg>
-                                    Sign Up
-                                </button> */}
+                                
                             </div>
                         )}
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </nav>
     )

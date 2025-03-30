@@ -20,7 +20,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-b from-blue-600 to-indigo-700 text-white pt-16 pb-24 px-4">
+      <div className="bg-gradient-to-b from-blue-500 to-indigo-400 text-white pt-16 pb-24 px-4">
         <div className="container mx-auto max-w-4xl">
           <Navbar />
 

@@ -11,7 +11,7 @@ const UserForm = () => {
     const [name, setName] = useState(userData.name)
     const [email, setEmail] = useState(userData.email)
     const [loading, setLoading] = useState(false)
-    
+
     const updateUserData = async (e) => {
         e.preventDefault()
         setLoading(true)
@@ -41,7 +41,7 @@ const UserForm = () => {
                 <h2 className="text-2xl font-bold text-white">Personal Information</h2>
                 <p className="text-blue-100 mt-1">Update your personal details</p>
             </div>
-            
+
             <form onSubmit={updateUserData} className="p-6">
                 <div className="space-y-6">
                     <div>
@@ -65,7 +65,7 @@ const UserForm = () => {
                             />
                         </div>
                     </div>
-                    
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">
                             Email Address
@@ -89,7 +89,7 @@ const UserForm = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="mt-8">
                     <button
                         type="submit"

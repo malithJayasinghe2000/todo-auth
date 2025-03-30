@@ -6,22 +6,22 @@ const Home = () => {
   return (
     <div className='flex flex-col min-h-screen bg-gradient-to-br from-indigo-50 via-blue-100 to-purple-100'>
       <Navbar />
-      
-      <div className='container mx-auto px-4 flex flex-col md:flex-row items-center justify-between mt-24 mb-10'>
+
+      <div className='container mx-auto px-4 flex flex-col md:flex-row items-center justify-between mt-14 mb-10'>
         {/* Left column with hero content */}
         <div className='md:w-1/2 mb-10 md:mb-0'>
           <Hero />
         </div>
-        
-        {/* Right column with task management image */}
+
+        {/*task management image */}
         <div className='md:w-1/2 flex justify-center'>
           <div className='relative max-w-md'>
-            <img 
-              src="https://img.freepik.com/free-vector/list-concept-illustration_114360-2498.jpg" 
-              alt="Task Management Illustration" 
+            <img
+              src="https://img.freepik.com/free-vector/list-concept-illustration_114360-2498.jpg"
+              alt="Task Management Illustration"
               className='w-full h-auto rounded-lg shadow-xl'
             />
-            
+
             {/* Simple floating task indicators */}
             <div className='absolute -top-3 -right-3 bg-white p-2 rounded-lg shadow-md transform rotate-6'>
               <div className='flex items-center gap-2'>
@@ -29,7 +29,7 @@ const Home = () => {
                 <span className='text-xs font-medium text-gray-700'>Completed</span>
               </div>
             </div>
-            
+
             <div className='absolute -bottom-3 -left-3 bg-white p-2 rounded-lg shadow-md transform -rotate-6'>
               <div className='flex items-center gap-2'>
                 <div className='w-3 h-3 rounded-full bg-blue-500'></div>
@@ -53,7 +53,7 @@ const Home = () => {
             <h3 className='text-lg font-semibold mb-2'>Create Tasks</h3>
             <p className='text-gray-600'>Easily create and organize your tasks with priorities</p>
           </div>
-          
+
           {/* Feature 2 */}
           <div className='bg-white/60 backdrop-blur-sm p-6 rounded-lg shadow-sm'>
             <div className='bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-green-600'>
@@ -64,7 +64,7 @@ const Home = () => {
             <h3 className='text-lg font-semibold mb-2'>Track Progress</h3>
             <p className='text-gray-600'>Monitor your task completion status</p>
           </div>
-          
+
           {/* Feature 3 */}
           <div className='bg-white/60 backdrop-blur-sm p-6 rounded-lg shadow-sm'>
             <div className='bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-purple-600'>

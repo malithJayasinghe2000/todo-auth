@@ -8,6 +8,6 @@ taskRouter.post('/create', userAuth, createTask);
 taskRouter.get('/get', userAuth, getTasks);
 taskRouter.delete('/delete',userAuth, deleteTask);
 taskRouter.put('/update',userAuth, updateTask);
-taskRouter.put('/done',userAuth, taskDone); // Assuming you want to use the same updateTask function for marking as done
+taskRouter.put('/done',userAuth, taskDone); // marking as done
 
 export default taskRouter;

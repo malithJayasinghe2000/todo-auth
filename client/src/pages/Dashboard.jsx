@@ -76,22 +76,22 @@ const Dashboard = () => {
     }
 
     const handleDeleteTask = async (taskId) => {
-       
-            try {
-                const { data } = await axios.delete(`${backendUrl}/api/task/delete`, {
-                    data: { taskId }
-                })
-                if (data.success) {
-                    toast.success(data.message)
-                    fetchTasks()
-                } else {
-                    toast.error(data.message)
-                }
-            } catch (error) {
-                toast.error(error.message)
+
+        try {
+            const { data } = await axios.delete(`${backendUrl}/api/task/delete`, {
+                data: { taskId }
+            })
+            if (data.success) {
+                toast.success(data.message)
+                fetchTasks()
+            } else {
+                toast.error(data.message)
             }
+        } catch (error) {
+            toast.error(error.message)
         }
-    
+    }
+
 
     const openEditForm = (task) => {
         setSelectedTask(task)
