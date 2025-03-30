@@ -54,7 +54,7 @@ npm install
 #### Server
 Create a `.env` file in the `server` directory with the following:
 ```
-PORT=5000
+PORT=8000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 SMTP_HOST=your_smtp_host
@@ -66,7 +66,7 @@ SMTP_PASS=your_smtp_password
 #### Client
 Create a `.env` file in the `client` directory with:
 ```
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:8000
 ```
 
 ### Running the Application
