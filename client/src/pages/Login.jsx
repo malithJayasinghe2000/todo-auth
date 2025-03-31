@@ -8,13 +8,19 @@ import Navbar from '../components/Navbar'
 const Login = () => {
     const navigate = useNavigate()
 
-    const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContext)
+    const { backendUrl, setIsLoggedin, getUserData, isLoggedin } = useContext(AppContext)
 
     const [state, setState] = useState('Login')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+
+    useEffect(() => {
+        if(isLoggedin){
+            navigate('/dashboard')
+        }
+    }, [isLoggedin, navigate])
 
     const onSubmitHandler = async (e) => {
 
