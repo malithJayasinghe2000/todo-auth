@@ -16,11 +16,11 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
 
-    useEffect(() => {
-        if(isLoggedin){
-            navigate('/dashboard')
-        }
-    }, [isLoggedin, navigate])
+    // useEffect(() => {
+    //     if(isLoggedin){
+    //         navigate('/dashboard')
+    //     }
+    // }, [isLoggedin, navigate])
 
     const onSubmitHandler = async (e) => {
 
